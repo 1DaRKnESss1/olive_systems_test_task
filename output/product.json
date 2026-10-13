@@ -3,8 +3,21 @@
   "item_id": "SKU_2373",
   "title": "MAG Z890 TOMAHAWK WIFI",
   "brand": "MSI",
-  "product_category": null,
-  "category_tree": [],
+  "product_category": "Motherboards > INTEL PLATFORM > Intel Z890",
+  "category_tree": [
+    {
+      "name": "Motherboards",
+      "url": "https://us-store.msi.com/Motherboards"
+    },
+    {
+      "name": "INTEL PLATFORM",
+      "url": "https://us-store.msi.com/Motherboards/Intel-Platform-Motherboard"
+    },
+    {
+      "name": "Intel Z890",
+      "url": "https://us-store.msi.com/Motherboards/Intel-Platform-Motherboard/INTEL-Z890"
+    }
+  ],
   "description": null,
   "price": 259.99,
   "sale_price": null,
@@ -16,5 +29,5 @@
   "review_count": null,
   "gtin": null,
   "mpn": null,
-  "scraped_at": "2026-10-13T10:15:03.725Z"
+  "scraped_at": "2026-10-13T10:30:09.413Z"
 }

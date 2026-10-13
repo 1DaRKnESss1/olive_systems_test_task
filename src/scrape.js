@@ -101,6 +101,26 @@ async function extractBrand(page, title) {
   return index > 0 ? cleanText(docTitle.slice(0, index)) : null;
 }
 
+// Breadcrumbs: "Home > Motherboards > INTEL PLATFORM > Intel Z890 > <product>".
+// The category path is everything between "Home" (link to the site root) and
+// the current product (the last, "active" item without a link).
+async function extractCategoryTree(page) {
+  const items = await page.locator('ol.breadcrumb li.breadcrumb-item:not(.active)').evaluateAll((lis) =>
+    lis.map((li) => {
+      const link = li.querySelector('a');
+      return { name: li.textContent, url: link ? link.href : null };
+    })
+  );
+
+  return items
+    .map((item) => ({ name: cleanText(item.name), url: item.url }))
+    .filter((item) => item.name && !isSiteRoot(item.url));
+}
+
+function isSiteRoot(url) {
+  return url !== null && new URL(url).pathname === '/';
+}
+
 // The page pushes a GA4 "view_item" event into window.dataLayer with the
 // product SKU id (e.g. "SKU_2373").
 async function extractItemId(page) {
@@ -124,14 +144,15 @@ async function scrapeProduct(page) {
   // Product title is an <h2 class="title">, not an <h1>
   const title = await getText(page, 'h2.title');
   const { price, sale_price } = await extractPrices(page);
+  const categoryTree = await extractCategoryTree(page);
 
   return {
     url: page.url(),
     item_id: await extractItemId(page),
     title,
     brand: await extractBrand(page, title),
-    product_category: null, // TODO
-    category_tree: [], // TODO
+    product_category: categoryTree.map((item) => item.name).join(' > ') || null,
+    category_tree: categoryTree,
     description: null, // TODO
     price,
     sale_price,
