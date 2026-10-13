@@ -165,6 +165,33 @@ async function extractAdditionalImages(page, mainImageUrl) {
   return unique.filter((url) => url !== mainImageUrl);
 }
 
+// The same summary paragraph is shown twice; the copy in the "Unite as One"
+// overview block has a meaningful class, the top one only has layout classes.
+async function extractDescription(page) {
+  return getText(page, '.resellerKVContent__description .context');
+}
+
+// Rating summary "★★★★★ 4.7 (3)" is injected by an AJAX request
+// (product/review) shortly after page load, so it has to be waited for.
+// Products without reviews never get it, which is not an error.
+async function extractRating(page) {
+  const empty = { star_rating: null, review_count: null };
+  try {
+    await page.waitForSelector('#average-rating-info', { state: 'attached', timeout: 10000 });
+  } catch {
+    return empty;
+  }
+
+  const text = await getText(page, '#average-rating-info'); // "4.7 (3)"
+  if (!text) return empty;
+  const rating = text.match(/^(\d+(\.\d+)?)/);
+  const count = text.match(/\((\d+)\)/);
+  return {
+    star_rating: rating ? Number(rating[1]) : null,
+    review_count: count ? Number(count[1]) : null,
+  };
+}
+
 // The page pushes a GA4 "view_item" event into window.dataLayer with the
 // product SKU id (e.g. "SKU_2373").
 async function extractItemId(page) {
@@ -191,6 +218,7 @@ async function scrapeProduct(page) {
   const categoryTree = await extractCategoryTree(page);
   const specs = await extractSpecs(page);
   const imageUrl = await getAttribute(page, '#imagePopup', 'src');
+  const { star_rating, review_count } = await extractRating(page);
 
   return {
     url: page.url(),
@@ -199,16 +227,16 @@ async function scrapeProduct(page) {
     brand: await extractBrand(page, title),
     product_category: categoryTree.map((item) => item.name).join(' > ') || null,
     category_tree: categoryTree,
-    description: null, // TODO
+    description: await extractDescription(page),
     price,
     sale_price,
     availability: await extractAvailability(page),
     image_url: imageUrl,
     additional_image_urls: await extractAdditionalImages(page, imageUrl),
     specs,
-    star_rating: null, // TODO
-    review_count: null, // TODO
-    gtin: null, // TODO
+    star_rating,
+    review_count,
+    gtin: null, // no GTIN/UPC/EAN anywhere on the page or in its data
     mpn: findSpec(specs, 'Manufacturer Number'),
     scraped_at: new Date().toISOString(),
   };
