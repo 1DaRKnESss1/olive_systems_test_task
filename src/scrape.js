@@ -121,6 +121,36 @@ function isSiteRoot(url) {
   return url !== null && new URL(url).pathname === '/';
 }
 
+// Spec cells keep line breaks (<br>, <li>) as separate lines; "-" means "not available"
+function cleanSpecValue(text) {
+  if (typeof text !== 'string') return null;
+  const lines = text.split('\n').map(cleanText).filter(Boolean);
+  const value = lines.join('\n');
+  return value && value !== '-' ? value : null;
+}
+
+// Specs are two side-by-side tables in .product-detail, each row is
+// <th scope="row">Name</th><td>Value</td>.
+async function extractSpecs(page) {
+  const rows = await page.locator('.product-detail table tr').evaluateAll((trs) =>
+    trs.map((tr) => ({
+      // textContent keeps the original case (the <th> is uppercased with CSS only),
+      // innerText turns <br> and <li> into line breaks
+      name: tr.querySelector('th')?.textContent,
+      value: tr.querySelector('td')?.innerText,
+    }))
+  );
+
+  return rows
+    .map((row) => ({ name: cleanText(row.name), value: cleanSpecValue(row.value) }))
+    .filter((spec) => spec.name);
+}
+
+function findSpec(specs, name) {
+  const spec = specs.find((s) => s.name.toLowerCase() === name.toLowerCase());
+  return spec ? spec.value : null;
+}
+
 // The page pushes a GA4 "view_item" event into window.dataLayer with the
 // product SKU id (e.g. "SKU_2373").
 async function extractItemId(page) {
@@ -145,6 +175,7 @@ async function scrapeProduct(page) {
   const title = await getText(page, 'h2.title');
   const { price, sale_price } = await extractPrices(page);
   const categoryTree = await extractCategoryTree(page);
+  const specs = await extractSpecs(page);
 
   return {
     url: page.url(),
@@ -159,11 +190,11 @@ async function scrapeProduct(page) {
     availability: await extractAvailability(page),
     image_url: await getAttribute(page, '#imagePopup', 'src'),
     additional_image_urls: [], // TODO
-    specs: [], // TODO
+    specs,
     star_rating: null, // TODO
     review_count: null, // TODO
     gtin: null, // TODO
-    mpn: null, // TODO
+    mpn: findSpec(specs, 'Manufacturer Number'),
     scraped_at: new Date().toISOString(),
   };
 }

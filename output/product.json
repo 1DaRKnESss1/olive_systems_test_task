@@ -24,10 +24,107 @@
   "availability": "out_of_stock",
   "image_url": "https://asset-us-store.msi.com/image/cache/catalog/Pd_page/Motherboard/2024/Z890TOMAHAWKWIFI/Z890TOMAHAWKWIFI-1-1024x1024.png",
   "additional_image_urls": [],
-  "specs": [],
+  "specs": [
+    {
+      "name": "OPERATING SYSTEM",
+      "value": "Support for Windows® 11 64-bit"
+    },
+    {
+      "name": "Manufacturer Number",
+      "value": "MAG Z890 TOMAHAWK WIFI"
+    },
+    {
+      "name": "Product Condition",
+      "value": "New"
+    },
+    {
+      "name": "CPU",
+      "value": "Supports Intel® Core™ Ultra Processors (Series 2)\nLGA 1851"
+    },
+    {
+      "name": "Chipset",
+      "value": "INTEL Z890 Chipset"
+    },
+    {
+      "name": "CPU Socket",
+      "value": "LGA 1851"
+    },
+    {
+      "name": "Form Factor",
+      "value": "ATX Form Factor"
+    },
+    {
+      "name": "Memory",
+      "value": "4x DDR5 UDIMM, Maximum Memory Capacity 256GB\nMemory Support 9200 - 6400 (OC) MT/s / 6400 - 4800 (JEDEC) MT/s\nMax. overclocking frequency:\n1DPC 1R Max speed up to 9200+ MT/s\n1DPC 2R Max speed up to 7200+ MT/s\n2DPC 1R Max speed up to 4800+ MT/s\n2DPC 2R Max speed up to 4800+ MT/s\nSupports Intel® POR Speed and JEDEC Speed\nSupports Memory Overclocking and Intel® XMP 3.0\nSupports Dual-Controller Dual-Channel mode\nSupports Non-ECC, Un-buffered memory\nSupports CUDIMM"
+    },
+    {
+      "name": "LAN",
+      "value": "Intel® Killer™ E5000 5Gbps LAN"
+    },
+    {
+      "name": "Wireless LAN",
+      "value": "Intel® Killer™ BE1750x Wi-Fi 7\nThe Wireless module is pre-installed in the M.2 (Key-E) slot\nSupports MU-MIMO TX/RX, 2.4GHz / 5GHz / 6GHz* (320MHz) up to 5.8Gbps\nSupports 802.11 a/ b/ g/ n/ ac/ ax/ be"
+    },
+    {
+      "name": "Bluetooth",
+      "value": "Supports Bluetooth® 5.4**, MLO, 4KQAM\n6GHz band support may depend on every country’s regulations and Wi-Fi 7 will be ready in Windows 11 SV3.\nThe Bluetooth version may be updated, please refer to the Wi-Fi chipset vendor's website for details. Bluetooth 5.4 support schedule depends on MSFT Windows 11 plan."
+    },
+    {
+      "name": "Audio",
+      "value": "Realtek® ALC1220P Codec\n7.1-Channel High Definition Audio\nSupports S/PDIF output"
+    },
+    {
+      "name": "MULTI-GPU",
+      "value": null
+    },
+    {
+      "name": "STORAGE",
+      "value": "4x M.2\nM.2_1 Source (From CPU) supports up to PCIe 5.0 x4 , supports 2280/2260 devices\nM.2_2 Source (From CPU) supports up to PCIe 4.0 x4 , supports 22110/2280/2260 devices\nM.2_3 Source (From Chipset) supports up to PCIe 4.0 x4 , supports 2280/2260/2242 devices\nM.2_4 Source (From Chipset) supports up to PCIe 4.0 x4 / SATA mode, supports 2280/2260/2242 devices\n4x SATA 6G\nPlease refer to the manual for M.2 SSD heatsink restrictions."
+    },
+    {
+      "name": "Onboard Graphics",
+      "value": "1x HDMI™\nSupport HDMI™ 2.1 with FRL, maximum resolution of 4K 120Hz\n2x Type-C DisplayPort\nThunderbolt™ 4 ports, supporting DisplayPort 1.4 over USB Type-C®, with a maximum resolution of 4K 120Hz / 8K 60Hz\nAvailable only on processors featuring integrated graphics. Graphics specifications may vary depending on the CPU installed."
+    },
+    {
+      "name": "RAID",
+      "value": "Supports RAID 0, RAID 1, RAID 5 and RAID 10 for SATA storage devices\nSupports RAID 0, RAID 1, RAID 5 and RAID 10 for M.2 NVMe storage devices"
+    },
+    {
+      "name": "I/O (Rear)",
+      "value": "USB 10Gbps Type-A\nUSB 5Gbps Type-A\n5G LAN\nWi-Fi / Bluetooth\nAudio Connectors\nHDMI™\nThunderbolt™ 4 40Gbps (Type-C)\nUSB 10Gbps Type-C\nFlash BIOS Button\nClear CMOS Button\nUSB 5Gbps Type-A\nS/PDIF-OUT"
+    },
+    {
+      "name": "Expansion Slots",
+      "value": "3x PCI-E x16 slot\nPCI_E1 Gen PCIe 5.0 supports up to x16 (From CPU)\nPCI_E2 Gen PCIe 4.0 supports up to x4 (From Chipset)\nPCI_E3 Gen PCIe 4.0 supports up to x4 (From Chipset)"
+    },
+    {
+      "name": "USB (Front)",
+      "value": "4x USB 2.0\n2x USB 5Gbps Type A\n1x USB 20Gbps Type C\nUSB 20Gbps Type-C (Front) support USB PD 27W fast charging for JUSBC1"
+    },
+    {
+      "name": "USB (Rear)",
+      "value": "4x USB 5Gbps Type A\n3x USB 10Gbps Type A\n1x USB 10Gbps Type C"
+    },
+    {
+      "name": "TYPE-C PORT",
+      "value": "1x USB 10Gbps Type C\n1x USB 20Gbps Type C"
+    },
+    {
+      "name": "Internal Connectors",
+      "value": "1x Thunderbolt5 card connector(JTBT5, support RTD3)\n1x Power Connector(ATX_PWR)\n2x Power Connector(CPU_PWR)\n1x Power Connector(PCIE_PWR 8pin)\n1x CPU Fan\n1x Combo Fan (Pump_Sys Fan)\n6x System Fan\n1x EZ Conn-header (JAF_2)\n2x Front Panel (JFP)\n1x Chassis Intrusion (JCI)\n1x Front Audio (JAUD)\n3x Addressable V2 RGB LED connector (JARGB_V2)\n1x RGB LED connector(JRGB)\n1x TPM pin header(Support TPM 2.0)\n4x USB 2.0 ports\n2x USB 5Gbps Type A ports\n1x USB 20Gbps Type C ports"
+    },
+    {
+      "name": "Dimensions",
+      "value": "12.00\" x 9.60\""
+    },
+    {
+      "name": "Manufacturer Warranty",
+      "value": "3 Year"
+    }
+  ],
   "star_rating": null,
   "review_count": null,
   "gtin": null,
-  "mpn": null,
-  "scraped_at": "2026-10-13T10:30:09.413Z"
+  "mpn": "MAG Z890 TOMAHAWK WIFI",
+  "scraped_at": "2026-10-13T10:32:40.813Z"
 }
