@@ -53,31 +53,13 @@ async function getAttribute(page, selector, name) {
 
 // ---------- Field extractors ----------
 
-// The bundle dropdown ("Motherboard Only / Without Bundle (+$0.00)",
-// "... 2TB SSD (+$319.00)") changes the displayed price. On page load nothing
-// is selected ("--- Please Select ---") and the price is the base one; a selected
-// option gets the "active" class. Returns the total surcharge of selected options.
-async function extractBundleSurcharge(page) {
-  const selected = await page.locator('.product-dropdown .dropdown-item.active').allTextContents();
-  return selected.reduce((sum, text) => {
-    const match = text.match(/\(\+\$([\d,.]+)\)/);
-    return sum + (match ? parsePrice(match[1]) : 0);
-  }, 0);
-}
-
-// Removes the bundle surcharge so the price is for the product alone
-function withoutSurcharge(price, surcharge) {
-  if (price === null) return null;
-  return Math.round((price - surcharge) * 100) / 100;
-}
-
-// Prices live in #prices-wrapper. When the product is on sale the store also
-// shows a struck-through old price (".price-old" in other product cards), so the
-// old one is the regular price and the new one is the sale price.
+// Prices live in #prices-wrapper. On page load no bundle option is selected in
+// the bundle dropdown, so this is the price of the product alone. When the product
+// is on sale the store also shows a struck-through old price (".price-old" in other
+// product cards), so the old one is the regular price and the new one is the sale price.
 async function extractPrices(page) {
-  const surcharge = await extractBundleSurcharge(page);
-  const current = withoutSurcharge(parsePrice(await getText(page, '#prices-new')), surcharge);
-  const old = withoutSurcharge(parsePrice(await getText(page, '#prices-wrapper [class*="old"]')), surcharge);
+  const current = parsePrice(await getText(page, '#prices-new'));
+  const old = parsePrice(await getText(page, '#prices-wrapper [class*="old"]'));
 
   if (old !== null && current !== null && old > current) {
     return { price: old, sale_price: current };

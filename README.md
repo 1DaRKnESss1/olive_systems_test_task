@@ -64,8 +64,8 @@ The page has no JSON-LD or product microdata, so most fields are read from the D
   (`channel: 'chromium'`) with a regular Chrome user agent, which loads the page normally.
   Both changes are needed; either one alone still gets 403.
 - **Bundle options.** A dropdown lets the buyer add a bundle (e.g. a 2TB SSD for +$319.00),
-  which changes the displayed price. `price` is always the price of the product alone:
-  if a bundle option is selected, its surcharge is subtracted.
+  which changes the displayed price. On page load no bundle is selected, so `#prices-new`
+  shows the price of the product alone.
 - **Sale price.** The product is not discounted at the moment, so `sale_price` is `null`.
   When the store shows a struck-through old price next to the current one, the old price
   goes to `price` and the current one to `sale_price`.
