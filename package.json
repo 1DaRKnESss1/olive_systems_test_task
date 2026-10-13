@@ -1,10 +1,11 @@
 {
-  "name": "olive_test",
+  "name": "msi-product-scraper",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scrape": "node src/scrape.js"
   },
   "keywords": [],
   "author": "",
