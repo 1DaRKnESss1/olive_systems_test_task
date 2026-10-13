@@ -23,7 +23,14 @@
   "sale_price": null,
   "availability": "out_of_stock",
   "image_url": "https://asset-us-store.msi.com/image/cache/catalog/Pd_page/Motherboard/2024/Z890TOMAHAWKWIFI/Z890TOMAHAWKWIFI-1-1024x1024.png",
-  "additional_image_urls": [],
+  "additional_image_urls": [
+    "https://asset-us-store.msi.com/image/cache/catalog/Pd_page/Motherboard/2024/Z890TOMAHAWKWIFI/Z890TOMAHAWKWIFI-2-1024x1024.png",
+    "https://asset-us-store.msi.com/image/cache/catalog/Pd_page/Motherboard/2024/Z890TOMAHAWKWIFI/Z890TOMAHAWKWIFI-3-1024x1024.png",
+    "https://asset-us-store.msi.com/image/cache/catalog/Pd_page/Motherboard/2024/Z890TOMAHAWKWIFI/Z890TOMAHAWKWIFI-4-1024x1024.png",
+    "https://asset-us-store.msi.com/image/cache/catalog/Pd_page/Motherboard/2024/Z890TOMAHAWKWIFI/Z890TOMAHAWKWIFI-5-1024x1024.png",
+    "https://asset-us-store.msi.com/image/cache/catalog/Pd_page/Motherboard/2024/Z890TOMAHAWKWIFI/Z890TOMAHAWKWIFI-6-1024x1024.png",
+    "https://asset-us-store.msi.com/image/cache/catalog/Pd_page/Motherboard/2024/Z890TOMAHAWKWIFI/Z890TOMAHAWKWIFI-7-1024x1024.png"
+  ],
   "specs": [
     {
       "name": "OPERATING SYSTEM",
@@ -126,5 +133,5 @@
   "review_count": null,
   "gtin": null,
   "mpn": "MAG Z890 TOMAHAWK WIFI",
-  "scraped_at": "2026-10-13T10:32:40.813Z"
+  "scraped_at": "2026-10-13T10:36:41.021Z"
 }

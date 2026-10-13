@@ -151,6 +151,20 @@ function findSpec(specs, name) {
   return spec ? spec.value : null;
 }
 
+// Gallery thumbnails in #carouselImages. Each thumbnail has a "popup_img"
+// attribute with the full-size (1024x1024) image, same size as the main image.
+// Swiper clones slides for its infinite loop (".swiper-slide-duplicate"); clones
+// are skipped to keep the gallery order, URLs are de-duplicated just in case,
+// and the main image is excluded since it is already in image_url.
+async function extractAdditionalImages(page, mainImageUrl) {
+  const urls = await page
+    .locator('#carouselImages .swiper-slide:not(.swiper-slide-duplicate) img')
+    .evaluateAll((imgs) => imgs.map((img) => img.getAttribute('popup_img') || img.src));
+
+  const unique = [...new Set(urls.map(cleanText).filter(Boolean))];
+  return unique.filter((url) => url !== mainImageUrl);
+}
+
 // The page pushes a GA4 "view_item" event into window.dataLayer with the
 // product SKU id (e.g. "SKU_2373").
 async function extractItemId(page) {
@@ -176,6 +190,7 @@ async function scrapeProduct(page) {
   const { price, sale_price } = await extractPrices(page);
   const categoryTree = await extractCategoryTree(page);
   const specs = await extractSpecs(page);
+  const imageUrl = await getAttribute(page, '#imagePopup', 'src');
 
   return {
     url: page.url(),
@@ -188,8 +203,8 @@ async function scrapeProduct(page) {
     price,
     sale_price,
     availability: await extractAvailability(page),
-    image_url: await getAttribute(page, '#imagePopup', 'src'),
-    additional_image_urls: [], // TODO
+    image_url: imageUrl,
+    additional_image_urls: await extractAdditionalImages(page, imageUrl),
     specs,
     star_rating: null, // TODO
     review_count: null, // TODO
